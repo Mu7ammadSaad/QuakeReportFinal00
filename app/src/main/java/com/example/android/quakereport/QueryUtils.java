@@ -36,7 +36,13 @@ public final class QueryUtils {
     /**
       *Query the USGS dataset and return a list of {@link Earthquake} objects.
      */
-    public static List<Earthquake> fetchEarthquakeData(String requestUrl) {
+    public static List<Earthquake> fetchEarthquakeData(String requestUrl){
+
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -48,10 +54,11 @@ public final class QueryUtils {
             Log.e(LOG_TAG, "Error closing input stream", e);
         }
         // Extract relevant fields from the JSON response and create a list of {@link Earthquake}s
-        List<Earthquake> mEarthquakes = extractFeatureFromJson(jsonResponse);
+       // List<Earthquake> mEarthquakes = extractFeatureFromJson(jsonResponse);
 
         // Return the list of {@link Earthquake}s
-        return mEarthquakes;
+       // return mEarthquakes;
+        return extractFeatureFromJson(jsonResponse);
     }
     /**
      * Returns new URL object from the given string URL.
